@@ -17,7 +17,7 @@ function Navbar() {
 				<Link href={'/contact'} className='mr-5 hover:text-gray-900'>Contact</Link>
 			
 			</nav>
-			<Link href={'/shopping-card'}>
+			<Link href={'/shopping-cart'}>
 			<button className='button bg-blue-700 text-white border-transparent hover:border-blue-600 hover:bg-transparent hover:text-black'>
 				MY BAG
 				</button>

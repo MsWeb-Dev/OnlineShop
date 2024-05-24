@@ -1,8 +1,8 @@
 import { ProductType } from '@/interface'
 import Product from '../components/product'
-import Hero from '@/components/hero'
 import Cta from '@/components/cta'
 import Statistics from '@/components/statistics'
+import Hero from '@/components/hero'
 
 export default async function Home() {
     const res = await fetch('https://fakestoreapi.com/products')
@@ -10,7 +10,7 @@ export default async function Home() {
 
     return (
         <main className='min-h-screen max-w-7xl mx-auto px-8 xl:px-0 '>
-          <Hero></Hero>
+            <Hero></Hero>
             <section className='flex flex-col space-y-12 '>
                 <h1 className='text-5xl font-bold text-center'>Woman Shop</h1>
             </section>

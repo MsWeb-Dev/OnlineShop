@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 const Statistics = () => {
 	return (
 		<section className='text-gray-600 body-font'>
@@ -39,10 +41,12 @@ const Statistics = () => {
 					</div>
 				</div>
 				<div className='lg:w-1/2 sm:w-1/3 w-full rounded-lg overflow-hidden mt-6 sm:mt-0'>
-					<img
+					<Image
 						className='object-cover object-center w-full h-full'
 						src='https://dummyimage.com/600x300'
 						alt='stats'
+						width={300}
+						height={300}
 					/>
 				</div>
 			</div>
