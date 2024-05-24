@@ -1,6 +1,8 @@
 import { ProductType } from '@/interface'
 import Product from '../components/product'
 import Hero from '@/components/hero'
+import Cta from '@/components/cta'
+import Statistics from '@/components/statistics'
 
 export default async function Home() {
     const res = await fetch('https://fakestoreapi.com/products')
@@ -17,6 +19,8 @@ export default async function Home() {
                     <Product key={product.id} product={product} />
                 ))}
             </div>
+            <Cta></Cta>
+            <Statistics></Statistics>
         </main>
     )
 }
