@@ -1,31 +1,31 @@
-'use client';
+'use client'
 
-import CustomImage from '@/components/image';
-import { ProductType } from '@/interface';
-import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline';
-import { StarIcon } from '@heroicons/react/24/solid';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import CustomImage from '@/components/image'
+import { ProductType } from '@/interface'
+import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
+import { StarIcon } from '@heroicons/react/24/solid'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 const ShoppingCart = () => {
-	const [total, setTotal] = useState<number>(0);
-	const [products, setProducts] = useState<ProductType[]>([]);
+	const [total, setTotal] = useState<number>(0)
+	const [products, setProducts] = useState<ProductType[]>([])
 
 	useEffect(() => {
 		// Ensure localStorage is accessed only in the browser
 		if (typeof window !== 'undefined') {
-			const storedProducts = localStorage.getItem('carts');
+			const storedProducts = localStorage.getItem('carts')
 			if (storedProducts) {
-				setProducts(JSON.parse(storedProducts));
+				setProducts(JSON.parse(storedProducts))
 			}
 		}
-	}, []);
+	}, [])
 
 	const removeProduct = (id: number) => {
-		const updatedCart = products.filter(product => product.id !== id);
-		localStorage.setItem('carts', JSON.stringify(updatedCart));
-		setProducts(updatedCart);
-	};
+		const updatedCart = products.filter(product => product.id !== id)
+		localStorage.setItem('carts', JSON.stringify(updatedCart))
+		setProducts(updatedCart)
+	}
 
 	const handleIncrement = (id: number) => {
 		const updatedCart = products.map(product => {
@@ -33,51 +33,49 @@ const ShoppingCart = () => {
 				return {
 					...product,
 					quantity: product.quantity + 1,
-				};
+				}
 			}
-			return product;
-		});
+			return product
+		})
 
-		localStorage.setItem('carts', JSON.stringify(updatedCart));
-		setProducts(updatedCart);
-	};
+		localStorage.setItem('carts', JSON.stringify(updatedCart))
+		setProducts(updatedCart)
+	}
 
 	const handleDecrement = (id: number) => {
-		const existProduct = products.find(product => product.id === id);
+		const existProduct = products.find(product => product.id === id)
 
 		if (existProduct?.quantity === 1) {
-			removeProduct(existProduct.id);
+			removeProduct(existProduct.id)
 		} else {
 			const updatedCart = products.map(product => {
 				if (product.id === id) {
 					return {
 						...product,
 						quantity: product.quantity - 1,
-					};
+					}
 				}
-				return product;
-			});
+				return product
+			})
 
-			localStorage.setItem('carts', JSON.stringify(updatedCart));
-			setProducts(updatedCart);
+			localStorage.setItem('carts', JSON.stringify(updatedCart))
+			setProducts(updatedCart)
 		}
-	};
+	}
 
 	useEffect(() => {
 		const total = products.reduce((acc, item) => {
-			return acc + item.price * item.quantity;
-		}, 0);
+			return acc + item.price * item.quantity
+		}, 0)
 
-		setTotal(total);
-	}, [products]);
+		setTotal(total)
+	}, [products])
 
 	return (
 		<>
 			{products.length ? (
 				<div className='h-screen bg-gray-100 pt-20'>
-					<h1 className='mb-10 text-center text-2xl font-bold'>
-						Cart Items
-					</h1>
+					<h1 className='mb-10 text-center text-2xl font-bold'>Cart Items</h1>
 					<div className='mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0'>
 						<div className='rounded-lg md:w-2/3'>
 							{products.map(product => (
@@ -102,9 +100,7 @@ const ShoppingCart = () => {
 													<div className='flex items-center ml-2 mr-6'>
 														{Array.from(
 															{
-																length: Math.floor(
-																	product.rating.rate
-																),
+																length: Math.floor(product.rating.rate),
 															},
 															(_, i) => (
 																<StarIcon
@@ -115,8 +111,7 @@ const ShoppingCart = () => {
 														)}
 														{Array.from(
 															{
-																length:
-																	5 - Math.floor(product.rating.rate),
+																length: 5 - Math.floor(product.rating.rate),
 															},
 															(_, i) => (
 																<StarIconOutline
@@ -158,12 +153,13 @@ const ShoppingCart = () => {
 											</div>
 											<div className='flex items-center space-x-4'>
 												<p className='text-sm'>
-													{(
-														product.price * product.quantity
-													).toLocaleString('en-US', {
-														style: 'currency',
-														currency: 'usd',
-													})}
+													{(product.price * product.quantity).toLocaleString(
+														'en-US',
+														{
+															style: 'currency',
+															currency: 'usd',
+														}
+													)}
 												</p>
 												<svg
 													xmlns='http://www.w3.org/2000/svg'
@@ -215,9 +211,7 @@ const ShoppingCart = () => {
 											style: 'currency',
 										})}
 									</p>
-									<p className='text-sm text-gray-700'>
-										including VAT
-									</p>
+									<p className='text-sm text-gray-700'>including VAT</p>
 								</div>
 							</div>
 							<button className='mt-6 w-full rounded-md bg-blue-500 py-4 font-medium  text-blue-50 hover:bg-blue-600'>
@@ -250,7 +244,7 @@ const ShoppingCart = () => {
 							Shopping cart is empty
 						</h1>
 						<p className='text-slate-600 mt-5 lg:text-lg'>
-							The page you are looking for doesn't exist or <br />
+							The page you are looking for doesn`t exist or <br />
 							has been removed.
 						</p>
 						<Link href={'/products'}>
@@ -262,7 +256,7 @@ const ShoppingCart = () => {
 				</div>
 			)}
 		</>
-	);
-};
+	)
+}
 
-export default ShoppingCart;
+export default ShoppingCart
